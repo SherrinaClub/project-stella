@@ -1,0 +1,22 @@
+{
+  "name": "project-stella",
+  "version": "1.0.0",
+  "description": "provide service for chinese translation group",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SherrinaClub/project-stella.git"
+  },
+  "author": "MC Qu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SherrinaClub/project-stella/issues"
+  },
+  "homepage": "https://github.com/SherrinaClub/project-stella#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
