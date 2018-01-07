@@ -16,7 +16,7 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
-      res.redirect('/surveys');
+      res.redirect('/');
     }
   );
 
@@ -28,7 +28,7 @@ module.exports = app => {
   );
 
   app.get('/auth/qq/callback', passport.authenticate('qq'), (req, res) => {
-    res.redirect('/greeting');
+    res.redirect('/home');
   });
 
   app.get('/api/current_user', (req, res) => {
