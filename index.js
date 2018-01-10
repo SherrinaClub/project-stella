@@ -4,6 +4,7 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('./models/User');
+require('./models/Subject');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
@@ -20,6 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app);
+require('./routes/subjectRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production file
