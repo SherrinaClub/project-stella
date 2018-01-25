@@ -34,7 +34,7 @@ class Header extends Component {
           <Navbar.Header>
             <Navbar.Brand>
               <Link
-                to={this.props.auth ? '/home' : '/'}
+                to={this.props.auth ? '/teamHome' : '/'}
                 className="left brand-logo"
               >
                 Stella
