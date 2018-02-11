@@ -5,7 +5,6 @@ const Subject = mongoose.model('subject');
 
 module.exports = app => {
   app.post('/api/createSubjects', requireLogin, async (req, res) => {
-    console.log(JSON.stringify(req.body));
     const {
       originalTitle,
       transTitles,
