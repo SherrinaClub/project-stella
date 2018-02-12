@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from 'reactstrap';
 
 class Header extends Component {
   constructor() {
@@ -9,6 +26,7 @@ class Header extends Component {
     this.state = { value: '' };
 
     this.handleChange = this.handleChange.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
   renderContent() {
@@ -17,19 +35,25 @@ class Header extends Component {
         return;
       case false:
         return (
-          <NavItem eventKey={2} href="/auth/google">
-            Login With Google
+          <NavItem>
+            <NavLink href="/auth/google">Login with Google</NavLink>
           </NavItem>
         );
       default:
         return (
-          <NavDropdown title={this.props.auth.name} id="bg-nested-dropdown-1">
-            <MenuItem eventKey="1">detail</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey="2" href="/api/logout">
-              logout
-            </MenuItem>
-          </NavDropdown>
+          <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret>
+              {this.props.auth.name}
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>detail</DropdownItem>
+              <DropdownItem>Option 2</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>
+                <NavLink href="/api/logout">logout</NavLink>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         );
     }
   }
@@ -38,41 +62,42 @@ class Header extends Component {
     this.setState({ value: event.target.value });
   }
 
+  submitHandler(event) {
+    event.preventDefault();
+    // do some sort of verification here if you need to
+    //this.props.push(`${this.state.value}`);
+    //this.context.history.push('/subjects/search');
+  }
+
   render() {
     return (
       <div>
-        <Navbar inverse collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link
-                to={this.props.auth ? '/teamHome' : '/'}
-                className="left brand-logo"
-              >
-                Stella
-              </Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>{this.renderContent()}</Nav>
-            <Navbar.Form pullLeft>
-              <div className="form-group">
-                <label htmlFor="search1">Search</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="search1"
-                  data-hotkey="s"
-                  placeholder="Search"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <Link to={'/subjects/search' + this.state.value}>
-                <button className="btn btn-default">Submit</button>
-              </Link>
-            </Navbar.Form>
-          </Navbar.Collapse>
+        <Navbar color="secondary" light expand="md">
+          <NavbarBrand href={this.props.auth ? '/teamHome' : '/'}>
+            Stella
+          </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <Form inline onSubmit={this.submitHandler}>
+                <FormGroup>
+                  <Label for="Search" hidden>
+                    Search
+                  </Label>
+                  <Input
+                    type="text"
+                    name="search"
+                    id="Search1"
+                    placeholder="search"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>{' '}
+                <Button type="submit">Submit</Button>
+              </Form>
+              {this.renderContent()}
+            </Nav>
+          </Collapse>
         </Navbar>
       </div>
     );

@@ -38,4 +38,10 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.get('/api/searchSubjects', async (req, res) => {
+    const subjects = await Subject.find({ _editor: req.user.id });
+
+    res.send(subjects);
+  });
 };

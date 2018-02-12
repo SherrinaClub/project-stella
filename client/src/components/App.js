@@ -7,6 +7,7 @@ import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SubjectNew from './subjects/SubjectNew';
+import SubjectSearch from './subjects/SubjectSearch';
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/teamHome" component={Dashboard} />
             <Route path="/subjects/new" component={SubjectNew} />
+            <Route path="/subjects/search" component={SubjectSearch} />
           </div>
         </BrowserRouter>
       </div>

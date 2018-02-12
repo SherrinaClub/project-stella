@@ -13,3 +13,9 @@ export const submitSubject = (values, history) => async dispatch => {
   history.push('/teamHome');
   dispatch({ type: FETCH_SUBJECTS, payload: res.data });
 };
+
+export const searchSubjects = () => async dispatch => {
+  const res = await axios.get('/api/searchSubjects');
+
+  dispatch({ type: FETCH_SUBJECTS, payload: res.data });
+};
